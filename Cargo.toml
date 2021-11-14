@@ -4,7 +4,7 @@ version = "1.0.0"
 authors = ["Ryan Lopopolo <rjl@hyperbo.la>"]
 edition = "2021"
 description = """
-Ergononic wrapper around `Vec::from_raw_parts` and `Vec::into_raw_parts`.
+Ergonomic wrapper around `Vec::from_raw_parts` and `Vec::into_raw_parts`.
 """
 repository = "https://github.com/artichoke/raw-parts"
 readme = "README.md"
