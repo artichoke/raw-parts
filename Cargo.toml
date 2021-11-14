@@ -11,6 +11,7 @@ readme = "README.md"
 license = "MIT"
 keywords = ["ffi", "no_std", "unsafe", "vec", "vector"]
 categories = ["no-std", "rust-patterns"]
+include = ["src/**/*", "tests/**/*", "LICENSE", "README.md"]
 
 [dependencies]
 
