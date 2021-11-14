@@ -101,7 +101,7 @@ pub struct RawParts<T> {
     /// the source vector.
     pub ptr: *mut T,
     /// The number of elements in the source vector, also referred to as its
-    /// 'length'.
+    /// "length".
     ///
     /// This value is the same as the value returned by [`Vec::len`] in the
     /// source vector.
@@ -271,8 +271,8 @@ mod tests {
 
     #[test]
     fn roundtrip() {
-        let mut vec = Vec::with_capacity(100); // capa = 100
-        vec.extend_from_slice(b"123456789"); // len = 9
+        let mut vec = Vec::with_capacity(100); // capacity is 100
+        vec.extend_from_slice(b"123456789"); // length is 9
 
         let raw_parts = RawParts::from_vec(vec);
         let raw_ptr = raw_parts.ptr;
@@ -286,8 +286,8 @@ mod tests {
 
     #[test]
     fn from_vec_sets_ptr() {
-        let mut vec = Vec::with_capacity(100); // capa = 100
-        vec.extend_from_slice(b"123456789"); // len = 9
+        let mut vec = Vec::with_capacity(100); // capacity is 100
+        vec.extend_from_slice(b"123456789"); // length is 9
         let ptr = vec.as_mut_ptr();
 
         let raw_parts = RawParts::from_vec(vec);
@@ -296,8 +296,8 @@ mod tests {
 
     #[test]
     fn from_vec_sets_length() {
-        let mut vec = Vec::with_capacity(100); // capa = 100
-        vec.extend_from_slice(b"123456789"); // len = 9
+        let mut vec = Vec::with_capacity(100); // capacity is 100
+        vec.extend_from_slice(b"123456789"); // length is 9
 
         let raw_parts = RawParts::from_vec(vec);
         assert_eq!(raw_parts.length, 9);
@@ -305,8 +305,8 @@ mod tests {
 
     #[test]
     fn from_vec_sets_capacity() {
-        let mut vec = Vec::with_capacity(100); // capa = 100
-        vec.extend_from_slice(b"123456789"); // len = 9
+        let mut vec = Vec::with_capacity(100); // capacity is 100
+        vec.extend_from_slice(b"123456789"); // length is 9
 
         let raw_parts = RawParts::from_vec(vec);
         assert_eq!(raw_parts.capacity, 100);

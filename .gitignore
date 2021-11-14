@@ -76,3 +76,8 @@ Cargo.lock
 *.pdb
 
 # End of https://www.toptal.com/developers/gitignore/api/rust,ruby
+
+# Overrides
+
+# Cargo and other Rust tool configuration lives in a top-level `.config/` directory.
+!/.config/
