@@ -84,7 +84,7 @@ task :'doc:open' do
   sh 'rustup run --install nightly cargo doc --workspace --open'
 end
 
-desc 'Run Focaccia unit tests'
+desc 'Run raw-parts unit tests'
 task :test do
   sh 'cargo test --workspace'
 end
