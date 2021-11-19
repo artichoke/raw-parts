@@ -21,8 +21,8 @@
 
 //! A wrapper around the decomposed parts of a `Vec<T>`.
 //!
-//! This struct contains the `Vec`'s internal pointer, length, and allocated
-//! capacity.
+//! This crate defines a struct that contains the `Vec`'s internal pointer,
+//! length, and allocated capacity.
 //!
 //! [`RawParts`] makes [`Vec::from_raw_parts`] and [`Vec::into_raw_parts`] easier
 //! to use by giving names to the returned values. This prevents errors from
@@ -53,7 +53,7 @@
 //! raw-parts is `no_std` compatible with a required dependency on [`alloc`].
 
 #![no_std]
-#![doc(html_root_url = "https://docs.rs/raw-parts/1.0.1")]
+#![doc(html_root_url = "https://docs.rs/raw-parts/1.0.2")]
 
 // Ensure code blocks in `README.md` compile
 #[cfg(doctest)]
