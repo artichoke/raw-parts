@@ -3,6 +3,7 @@ name = "raw-parts"
 version = "1.0.1"
 authors = ["Ryan Lopopolo <rjl@hyperbo.la>"]
 edition = "2021"
+rust-version = "1.56.0"
 description = """
 Ergonomic wrapper around `Vec::from_raw_parts` and `Vec::into_raw_parts`.
 """
