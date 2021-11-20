@@ -120,6 +120,21 @@ impl<T> From<Vec<T>> for RawParts<T> {
     }
 }
 
+/// TEST THIS
+/*
+impl fmt::Debug for RawParts<T> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+    
+    }
+}
+
+impl PartialEq for RawParts<T> {
+    fn eq(&self, other: &Self) -> bool {
+
+    }
+}
+*/
+
 // Do not implement the `From` trait in the other direction since `crate::from`
 // is an unsafe function.
 //
@@ -268,6 +283,7 @@ mod tests {
     use alloc::vec::Vec;
 
     use crate::RawParts;
+    use std::fmt;
 
     #[test]
     fn roundtrip() {
@@ -310,5 +326,14 @@ mod tests {
 
         let raw_parts = RawParts::from_vec(vec);
         assert_eq!(raw_parts.capacity, 100);
+    }
+
+    #[test]
+    fn debug_test() {
+        let mut vec = Vec::with_capacity(100); // capacity is 100
+        vec.extend_from_slice(b"123456789"); // length is 9
+
+        println!("{:?}", vec);
+        assert_eq!(1, 1);
     }
 }
