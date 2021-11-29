@@ -64,6 +64,8 @@ extern crate alloc;
 
 use alloc::vec::Vec;
 use core::mem::ManuallyDrop;
+use core::hash::{Hash, Hasher}; 
+use core::fmt;
 
 /// A wrapper around the decomposed parts of a `Vec<T>`.
 ///
@@ -94,7 +96,7 @@ use core::mem::ManuallyDrop;
 /// assert_eq!(rebuilt, [4294967295, 0, 1]);
 /// ```
 ///#[derive(Debug, PartialEq, Eq, Hash)]
-#[derive(Debug, Eq, Hash)]
+#[derive(Eq)]
 pub struct RawParts<T> {
     /// A non-null pointer to a buffer of `T`.
     ///
@@ -122,13 +124,12 @@ impl<T> From<Vec<T>> for RawParts<T> {
 }
 
 /// TEST THIS
-/*
-impl fmt::Debug for RawParts<T> {
+
+impl<T> fmt::Debug for RawParts<T> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-    
+        write!(f, "{:?} {} {}", self.ptr, self.length, self.capacity)
     }
 }
-*/
 
 impl<T> PartialEq for RawParts<T> {
     fn eq(&self, other: &Self) -> bool {
@@ -137,14 +138,13 @@ impl<T> PartialEq for RawParts<T> {
         self.capacity == other.capacity
     }
 }
-/*
-impl Hash for RawParts<T> {
-    fn hash<H: Hasher>(&self, state: & mut H) {
-        self.length.hash(state);
-        self.capacity.hash(state);
+
+impl<T> Hash for RawParts<T> {
+    fn hash<H: Hasher>(&self, state: &mut H) {
+        Hash::hash(self, state)
     }
 }
-*/
+
 // Do not implement the `From` trait in the other direction since `crate::from`
 // is an unsafe function.
 //
@@ -291,9 +291,9 @@ impl<T> RawParts<T> {
 #[cfg(test)]
 mod tests {
     use alloc::vec::Vec;
+    use alloc::fmt;
 
     use crate::RawParts;
-    ///use std::fmt;
 
     #[test]
     fn roundtrip() {
@@ -338,7 +338,6 @@ mod tests {
         assert_eq!(raw_parts.capacity, 100);
     }
 
-    /*
     #[test]
     fn debug_test() {
         let mut vec = Vec::with_capacity(100); // capacity is 100
@@ -347,7 +346,6 @@ mod tests {
         println!("{:?}", vec);
         assert_eq!(1, 1);
     }
-    */
 
     #[test]
     fn partial_eq_pass() {
