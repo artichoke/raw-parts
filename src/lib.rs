@@ -291,7 +291,7 @@ impl<T> RawParts<T> {
 #[cfg(test)]
 mod tests {
     use alloc::vec::Vec;
-    use alloc::fmt;
+    use alloc::format;
 
     use crate::RawParts;
 
@@ -343,7 +343,7 @@ mod tests {
         let mut vec = Vec::with_capacity(100); // capacity is 100
         vec.extend_from_slice(b"123456789"); // length is 9
 
-        println!("{:?}", vec);
+        format!("{:?}", vec);
         assert_eq!(1, 1);
     }
 
