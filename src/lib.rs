@@ -95,7 +95,6 @@ use core::fmt;
 /// };
 /// assert_eq!(rebuilt, [4294967295, 0, 1]);
 /// ```
-///#[derive(Debug, PartialEq, Eq, Hash)]
 #[derive(Eq)]
 pub struct RawParts<T> {
     /// A non-null pointer to a buffer of `T`.
@@ -133,7 +132,7 @@ impl<T> fmt::Debug for RawParts<T> {
 
 impl<T> PartialEq for RawParts<T> {
     fn eq(&self, other: &Self) -> bool {
-        //self.ptr == other.ptr && 
+        self.ptr == other.ptr && 
         self.length == other.length &&
         self.capacity == other.capacity
     }
