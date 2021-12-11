@@ -140,7 +140,9 @@ impl<T> PartialEq for RawParts<T> {
 
 impl<T> Hash for RawParts<T> {
     fn hash<H: Hasher>(&self, state: &mut H) {
-        Hash::hash(self, state)
+        self.ptr.hash(state);
+        self.length.hash(state);
+        self.capacity.hash(state);
     }
 }
 
