@@ -122,8 +122,6 @@ impl<T> From<Vec<T>> for RawParts<T> {
     }
 }
 
-/// TEST THIS
-
 impl<T> fmt::Debug for RawParts<T> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{:?} {} {}", self.ptr, self.length, self.capacity)
@@ -376,7 +374,7 @@ mod tests {
     fn partial_eq_fail_length() {
         let mut vec_1 = Vec::with_capacity(100); // capacity is 100
         vec_1.extend_from_slice(b"123456789"); // length is 9
-        let mut vec_2 = Vec::with_capacity(101); // capacity is 100
+        let mut vec_2 = Vec::with_capacity(100); // capacity is 100
         vec_2.extend_from_slice(b"12345678"); // length is 8
 
         let raw_parts_1 = RawParts::from_vec(vec_1);
