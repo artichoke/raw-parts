@@ -65,7 +65,8 @@ extern crate alloc;
 use alloc::vec::Vec;
 use core::mem::ManuallyDrop;
 use core::hash::{Hash, Hasher}; 
-use core::fmt;
+use std::fmt;
+//use core::fmt;
 
 /// A wrapper around the decomposed parts of a `Vec<T>`.
 ///
@@ -123,8 +124,12 @@ impl<T> From<Vec<T>> for RawParts<T> {
 }
 
 impl<T> fmt::Debug for RawParts<T> {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "{:?} {} {}", self.ptr, self.length, self.capacity)
+    fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+        fmt.debug_struct("RawParts")
+            .field("ptr", &self.ptr)
+            .field("length", &self.length)
+            .field("capacity", &self.capacity)
+            .finish()
     }
 }
 
