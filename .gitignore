@@ -1,6 +1,6 @@
 
-# Created by https://www.toptal.com/developers/gitignore/api/rust,ruby
-# Edit at https://www.toptal.com/developers/gitignore?templates=rust,ruby
+# Created by https://www.toptal.com/developers/gitignore/api/ruby,rust,vim,visualstudiocode
+# Edit at https://www.toptal.com/developers/gitignore?templates=ruby,rust,vim,visualstudiocode
 
 ### Ruby ###
 *.gem
@@ -96,7 +96,26 @@ tags
 # Persistent undo
 [._]*.un~
 
-# End of https://www.toptal.com/developers/gitignore/api/rust,ruby
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Local History for Visual Studio Code
+.history/
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+.ionide
+
+# Support for Project snippet scope
+!.vscode/*.code-snippets
+
+# End of https://www.toptal.com/developers/gitignore/api/ruby,rust,vim,visualstudiocode
 
 # Overrides
 
