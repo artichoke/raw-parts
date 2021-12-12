@@ -1,15 +1,17 @@
 [package]
 name = "raw-parts"
-version = "1.1.0"
+version = "1.1.1"
 authors = ["Ryan Lopopolo <rjl@hyperbo.la>"]
+license = "MIT"
 edition = "2021"
 rust-version = "1.56.0"
+readme = "README.md"
+repository = "https://github.com/artichoke/raw-parts"
+documentation = "https://docs.rs/raw-parts"
+homepage = "https://github.com/artichoke/raw-parts"
 description = """
 Ergonomic wrapper around `Vec::from_raw_parts` and `Vec::into_raw_parts`.
 """
-repository = "https://github.com/artichoke/raw-parts"
-readme = "README.md"
-license = "MIT"
 keywords = ["ffi", "no_std", "unsafe", "vec", "vector"]
 categories = ["no-std", "rust-patterns"]
 include = ["src/**/*", "tests/**/*", "LICENSE", "README.md"]
