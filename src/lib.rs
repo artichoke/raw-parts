@@ -53,7 +53,7 @@
 //! raw-parts is `no_std` compatible with a required dependency on [`alloc`].
 
 #![no_std]
-#![doc(html_root_url = "https://docs.rs/raw-parts/1.0.2")]
+#![doc(html_root_url = "https://docs.rs/raw-parts/1.1.0")]
 
 // Ensure code blocks in `README.md` compile
 #[cfg(doctest)]
