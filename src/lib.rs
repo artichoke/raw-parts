@@ -63,9 +63,9 @@ mod readme {}
 extern crate alloc;
 
 use alloc::vec::Vec;
-use core::mem::ManuallyDrop;
-use core::hash::{Hash, Hasher}; 
 use core::fmt;
+use core::hash::{Hash, Hasher}; 
+use core::mem::ManuallyDrop;
 
 /// A wrapper around the decomposed parts of a `Vec<T>`.
 ///
