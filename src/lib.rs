@@ -295,7 +295,7 @@ impl<T> RawParts<T> {
 mod tests {
     use alloc::vec::Vec;
     use alloc::format;
-
+    
     use crate::RawParts;
 
     #[test]
@@ -391,10 +391,10 @@ mod tests {
     
     #[test]
     fn partial_eq_pass() {
-        let mut vec_1 = Vec::with_capacity(100); // capacity is 100
-        vec_1.extend_from_slice(b"123456789"); // length is 9
+        let mut vec = Vec::with_capacity(100); // capacity is 100
+        vec.extend_from_slice(b"123456789"); // length is 9
 
-        let raw_parts_1 = RawParts::from_vec(vec_1);
-        assert_eq!(raw_parts_1, raw_parts_1);
+        let raw_parts = RawParts::from_vec(vec);
+        assert_eq!(raw_parts, raw_parts);
     }
 }
