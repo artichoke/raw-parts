@@ -64,7 +64,7 @@ extern crate alloc;
 
 use alloc::vec::Vec;
 use core::fmt;
-use core::hash::{Hash, Hasher}; 
+use core::hash::{Hash, Hasher};
 use core::mem::ManuallyDrop;
 
 /// A wrapper around the decomposed parts of a `Vec<T>`.
@@ -95,7 +95,6 @@ use core::mem::ManuallyDrop;
 /// };
 /// assert_eq!(rebuilt, [4294967295, 0, 1]);
 /// ```
-#[derive(Eq)]
 pub struct RawParts<T> {
     /// A non-null pointer to a buffer of `T`.
     ///
@@ -134,11 +133,11 @@ impl<T> fmt::Debug for RawParts<T> {
 
 impl<T> PartialEq for RawParts<T> {
     fn eq(&self, other: &Self) -> bool {
-        self.ptr == other.ptr && 
-        self.length == other.length &&
-        self.capacity == other.capacity
+        self.ptr == other.ptr && self.length == other.length && self.capacity == other.capacity
     }
 }
+
+impl<T> Eq for RawParts<T> {}
 
 impl<T> Hash for RawParts<T> {
     fn hash<H: Hasher>(&self, state: &mut H) {
@@ -293,9 +292,9 @@ impl<T> RawParts<T> {
 
 #[cfg(test)]
 mod tests {
-    use alloc::vec::Vec;
     use alloc::format;
-    
+    use alloc::vec::Vec;
+
     use crate::RawParts;
 
     #[test]
@@ -347,10 +346,13 @@ mod tests {
         vec.extend_from_slice(b"123456789"); // length is 9
         let raw_parts = RawParts::from_vec(vec);
 
-        assert_eq!(format!("RawParts {{ ptr: {:?}, length: 9, capacity: 100 }}", 
-                           raw_parts.ptr), 
-                   format!("{:?}", 
-                           raw_parts));
+        assert_eq!(
+            format!(
+                "RawParts {{ ptr: {:?}, length: 9, capacity: 100 }}",
+                raw_parts.ptr
+            ),
+            format!("{:?}", raw_parts)
+        );
     }
 
     #[test]
@@ -388,7 +390,7 @@ mod tests {
         let raw_parts_2 = RawParts::from_vec(vec_2);
         assert_ne!(raw_parts_1, raw_parts_2);
     }
-    
+
     #[test]
     fn partial_eq_pass() {
         let mut vec = Vec::with_capacity(100); // capacity is 100
