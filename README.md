@@ -23,7 +23,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-raw-parts = "1.0"
+raw-parts = "1.1"
 ```
 
 Then decompose `Vec<T>`s like:
