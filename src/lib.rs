@@ -396,7 +396,21 @@ mod tests {
         let mut vec = Vec::with_capacity(100); // capacity is 100
         vec.extend_from_slice(b"123456789"); // length is 9
 
-        let raw_parts = RawParts::from_vec(vec);
-        assert_eq!(raw_parts, raw_parts);
+        let RawParts {
+            ptr,
+            length,
+            capacity,
+        } = RawParts::from_vec(vec);
+        let a = RawParts {
+            ptr,
+            length,
+            capacity,
+        };
+        let b = RawParts {
+            ptr,
+            length,
+            capacity,
+        };
+        assert_eq!(a, b);
     }
 }
