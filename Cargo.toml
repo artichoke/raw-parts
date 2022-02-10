@@ -26,3 +26,10 @@ include = ["src/**/*", "tests/**/*", "LICENSE", "README.md"]
 version = "0.9.3"
 default-features = false
 features = ["markdown_deps_updated", "html_root_url_updated"]
+
+[package.metadata.docs.rs]
+# This sets the default target to `x86_64-unknown-linux-gnu` and only builds
+# that target. `raw-parts` has the same API and code on all targets.
+default-target = "x86_64-unknown-linux-gnu"
+targets = []
+rustdoc-args = ["--cfg", "docsrs"]
