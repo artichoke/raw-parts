@@ -72,8 +72,9 @@ cargo build
 
 ### Ruby
 
-raw-parts requires a recent Ruby 2.x and [bundler] 2.x. The
-[`.ruby-version`](.ruby-version) file in this repository specifies Ruby 2.6.3.
+raw-parts requires a recent Ruby and [bundler] for development tasks. The
+[`.ruby-version`](.ruby-version) file in this repository specifies the preferred
+Ruby toolchain.
 
 raw-parts uses [`rake`](Rakefile) as a task runner. You can see the available
 tasks by running:
