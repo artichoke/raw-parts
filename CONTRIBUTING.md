@@ -3,12 +3,15 @@
 👋 Hi and welcome to [Artichoke]. Thanks for taking the time to contribute!
 💪💎🙌
 
-Artichoke aspires to be a Ruby 2.6.3-compatible implementation of the Ruby
-programming language. [There is lots to do].
+Artichoke aspires to be a [recent MRI Ruby][mri-target]-compatible
+implementation of the Ruby programming language. [There is lots to do].
+
+[mri-target]:
+  https://github.com/artichoke/artichoke/blob/trunk/RUBYSPEC.md#mri-target
 
 raw-parts is a utility crate that makes `Vec::from_raw_parts` and
 `Vec::into_raw_parts` APIs easier to use by giving names to the raw parts.
-Artichoke uses this crate in its implementations of `Array` and `String`.
+Artichoke uses this crate in its implementations of [`Array`] and [`String`].
 
 If Artichoke does not run Ruby source code in the same way that MRI does, it is
 a bug and we would appreciate if you [filed an issue so we can fix it]. [File
@@ -202,8 +205,8 @@ Regular dependency bumps are handled by [@dependabot].
 
 [artichoke]: https://github.com/artichoke
 [there is lots to do]: https://github.com/artichoke/artichoke/issues
-[`symbol`]: https://ruby-doc.org/core-2.6.3/Symbol.html
-[`string`]: https://ruby-doc.org/core-2.6.3/String.html
+[`array`]: https://ruby-doc.org/core-3.1.2/Array.html
+[`string`]: https://ruby-doc.org/core-3.1.2/String.html
 [filed an issue so we can fix it]:
   https://github.com/artichoke/artichoke/issues/new
 [file bugs specific to raw-parts in this repository]:
