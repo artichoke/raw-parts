@@ -55,11 +55,6 @@
 #![no_std]
 #![doc(html_root_url = "https://docs.rs/raw-parts/1.1.2")]
 
-// Ensure code blocks in `README.md` compile
-#[cfg(doctest)]
-#[doc = include_str!("../README.md")]
-mod readme {}
-
 extern crate alloc;
 
 use alloc::vec::Vec;
@@ -414,3 +409,11 @@ mod tests {
         assert_eq!(a, b);
     }
 }
+
+// Ensure code blocks in `README.md` compile.
+//
+// This module declaration should be kept at the end of the file, in order to
+// not interfere with code coverage.
+#[cfg(doctest)]
+#[doc = include_str!("../README.md")]
+mod readme {}
