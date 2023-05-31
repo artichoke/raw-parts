@@ -336,6 +336,34 @@ mod tests {
     }
 
     #[test]
+    fn from_sets_ptr() {
+        let mut vec = Vec::with_capacity(100); // capacity is 100
+        vec.extend_from_slice(b"123456789"); // length is 9
+        let ptr = vec.as_mut_ptr();
+
+        let raw_parts = RawParts::from(vec);
+        assert_eq!(raw_parts.ptr, ptr);
+    }
+
+    #[test]
+    fn from_sets_length() {
+        let mut vec = Vec::with_capacity(100); // capacity is 100
+        vec.extend_from_slice(b"123456789"); // length is 9
+
+        let raw_parts = RawParts::from(vec);
+        assert_eq!(raw_parts.length, 9);
+    }
+
+    #[test]
+    fn from_sets_capacity() {
+        let mut vec = Vec::with_capacity(100); // capacity is 100
+        vec.extend_from_slice(b"123456789"); // length is 9
+
+        let raw_parts = RawParts::from(vec);
+        assert_eq!(raw_parts.capacity, 100);
+    }
+
+    #[test]
     fn debug_test() {
         let mut vec = Vec::with_capacity(100); // capacity is 100
         vec.extend_from_slice(b"123456789"); // length is 9
