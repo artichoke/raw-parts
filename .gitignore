@@ -1,5 +1,6 @@
-# Created by https://www.toptal.com/developers/gitignore/api/vim,rust,ruby
-# Edit at https://www.toptal.com/developers/gitignore?templates=vim,rust,ruby
+
+# Created by https://www.toptal.com/developers/gitignore/api/ruby,rust,vim
+# Edit at https://www.toptal.com/developers/gitignore?templates=ruby,rust,vim
 
 ### Ruby ###
 *.gem
@@ -95,9 +96,12 @@ tags
 # Persistent undo
 [._]*.un~
 
-# End of https://www.toptal.com/developers/gitignore/api/vim,rust,ruby
+# End of https://www.toptal.com/developers/gitignore/api/ruby,rust,vim
 
 # Overrides
 
 # Cargo and other Rust tool configuration lives in a top-level `.config/` directory.
 !/.config/
+# https://github.com/sourcefrog/cargo-mutants/blob/main/.gitignore
+mutants.out
+mutants.out.old
