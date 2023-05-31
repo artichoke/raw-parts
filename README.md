@@ -42,7 +42,7 @@ let rebuilt = unsafe {
     let ptr = ptr as *mut u32;
     let raw_parts = RawParts { ptr, length, capacity };
 
-    RawParts::into_vec(raw_parts)
+    raw_parts.into_vec()
 };
 assert_eq!(rebuilt, [4294967295, 0, 1]);
 ```
