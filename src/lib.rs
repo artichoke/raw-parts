@@ -43,7 +43,7 @@
 //!     let ptr = ptr as *mut u32;
 //!     let raw_parts = RawParts { ptr, length, capacity };
 //!
-//!     RawParts::into_vec(raw_parts)
+//!     raw_parts.into_vec()
 //! };
 //! assert_eq!(rebuilt, [4294967295, 0, 1]);
 //! ```
@@ -86,7 +86,7 @@ use core::mem::ManuallyDrop;
 ///     let ptr = ptr as *mut u32;
 ///     let raw_parts = RawParts { ptr, length, capacity };
 ///
-///     RawParts::into_vec(raw_parts)
+///     raw_parts.into_vec()
 /// };
 /// assert_eq!(rebuilt, [4294967295, 0, 1]);
 /// ```
@@ -184,7 +184,7 @@ impl<T> RawParts<T> {
     ///     let ptr = ptr as *mut u32;
     ///     let raw_parts = RawParts { ptr, length, capacity };
     ///
-    ///     RawParts::into_vec(raw_parts)
+    ///     raw_parts.into_vec()
     /// };
     /// assert_eq!(rebuilt, [4294967295, 0, 1]);
     /// ```
@@ -206,9 +206,6 @@ impl<T> RawParts<T> {
     }
 
     /// Creates a `Vec<T>` directly from the raw components of another vector.
-    ///
-    /// This function is declared as an associated function and must be called
-    /// as `RawParts::into_vec(raw_parts)`.
     ///
     /// # Safety
     ///
@@ -282,18 +279,17 @@ impl<T> RawParts<T> {
     ///
     ///     // Put everything back together into a Vec
     ///     let raw_parts = RawParts { ptr, length, capacity };
-    ///     let rebuilt = RawParts::into_vec(raw_parts);
+    ///     let rebuilt = raw_parts.into_vec();
     ///     assert_eq!(rebuilt, [4, 5, 6]);
     /// }
     /// ```
     #[must_use]
-    #[allow(clippy::needless_pass_by_value)]
-    pub unsafe fn into_vec(this: Self) -> Vec<T> {
+    pub unsafe fn into_vec(self) -> Vec<T> {
         let Self {
             ptr,
             length,
             capacity,
-        } = this;
+        } = self;
 
         // Safety:
         //
@@ -321,7 +317,7 @@ mod tests {
         let raw_parts = RawParts::from_vec(vec);
         let raw_ptr = raw_parts.ptr;
 
-        let mut roundtripped_vec = unsafe { RawParts::into_vec(raw_parts) };
+        let mut roundtripped_vec = unsafe { raw_parts.into_vec() };
 
         assert_eq!(roundtripped_vec.capacity(), 100);
         assert_eq!(roundtripped_vec.len(), 9);
