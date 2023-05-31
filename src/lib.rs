@@ -441,7 +441,67 @@ mod tests {
     }
 
     #[test]
-    fn hash_pass() {
+    fn hash_fail_pointer() {
+        let mut vec_1 = Vec::with_capacity(100); // capacity is 100
+        vec_1.extend_from_slice(b"123456789"); // length is 9
+        let mut vec_2 = Vec::with_capacity(100); // capacity is 100
+        vec_2.extend_from_slice(b"123456789"); // length is 9
+
+        let raw_parts_1 = RawParts::from_vec(vec_1);
+        let mut hasher = FxHasher::default();
+        raw_parts_1.hash(&mut hasher);
+        let hash_a = hasher.finish();
+
+        let raw_parts_2 = RawParts::from_vec(vec_2);
+        let mut hasher = FxHasher::default();
+        raw_parts_2.hash(&mut hasher);
+        let hash_b = hasher.finish();
+
+        assert_ne!(hash_a, hash_b);
+    }
+
+    #[test]
+    fn hash_fail_capacity() {
+        let mut vec_1 = Vec::with_capacity(100); // capacity is 100
+        vec_1.extend_from_slice(b"123456789"); // length is 9
+        let mut vec_2 = Vec::with_capacity(101); // capacity is 101
+        vec_2.extend_from_slice(b"123456789"); // length is 9
+
+        let raw_parts_1 = RawParts::from_vec(vec_1);
+        let mut hasher = FxHasher::default();
+        raw_parts_1.hash(&mut hasher);
+        let hash_a = hasher.finish();
+
+        let raw_parts_2 = RawParts::from_vec(vec_2);
+        let mut hasher = FxHasher::default();
+        raw_parts_2.hash(&mut hasher);
+        let hash_b = hasher.finish();
+
+        assert_ne!(hash_a, hash_b);
+    }
+
+    #[test]
+    fn hash_fail_length() {
+        let mut vec_1 = Vec::with_capacity(100); // capacity is 100
+        vec_1.extend_from_slice(b"123456789"); // length is 9
+        let mut vec_2 = Vec::with_capacity(100); // capacity is 100
+        vec_2.extend_from_slice(b"12345678"); // length is 8
+
+        let raw_parts_1 = RawParts::from_vec(vec_1);
+        let mut hasher = FxHasher::default();
+        raw_parts_1.hash(&mut hasher);
+        let hash_a = hasher.finish();
+
+        let raw_parts_2 = RawParts::from_vec(vec_2);
+        let mut hasher = FxHasher::default();
+        raw_parts_2.hash(&mut hasher);
+        let hash_b = hasher.finish();
+
+        assert_ne!(hash_a, hash_b);
+    }
+
+    #[test]
+    fn hash_eq_pass() {
         let mut vec = Vec::with_capacity(100); // capacity is 100
         vec.extend_from_slice(b"123456789"); // length is 9
         let raw_parts = RawParts::from_vec(vec);
