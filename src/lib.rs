@@ -189,7 +189,7 @@ impl<T> RawParts<T> {
     /// assert_eq!(rebuilt, [4294967295, 0, 1]);
     /// ```
     #[must_use]
-    pub fn from_vec(vec: Vec<T>) -> RawParts<T> {
+    pub fn from_vec(vec: Vec<T>) -> Self {
         // TODO: convert to `Vec::into_raw_parts` once it is stabilized.
         // See: https://doc.rust-lang.org/1.56.0/src/alloc/vec/mod.rs.html#717-720
         //
