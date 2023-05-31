@@ -24,7 +24,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-raw-parts = "1.1.2"
+raw-parts = "2.0.0"
 ```
 
 Then decompose `Vec<T>`s like:
