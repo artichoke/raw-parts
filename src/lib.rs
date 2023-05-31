@@ -189,9 +189,10 @@ impl<T> RawParts<T> {
     /// assert_eq!(rebuilt, [4294967295, 0, 1]);
     /// ```
     #[must_use]
-    pub fn from_vec(vec: Vec<T>) -> RawParts<T> {
-        // TODO: convert to `Vec::into_raw_parts` once it is stabilized.
-        // See: https://doc.rust-lang.org/1.56.0/src/alloc/vec/mod.rs.html#717-720
+    pub fn from_vec(vec: Vec<T>) -> Self {
+        // FIXME Update this when vec_into_raw_parts is stabilized
+        // See: https://doc.rust-lang.org/1.69.0/src/alloc/vec/mod.rs.html#823-826
+        // See: https://doc.rust-lang.org/beta/unstable-book/library-features/vec-into-raw-parts.html
         //
         // https://github.com/rust-lang/rust/issues/65816
         let mut me = ManuallyDrop::new(vec);
