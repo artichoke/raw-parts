@@ -217,22 +217,36 @@ impl<T> RawParts<T> {
     /// This is highly unsafe, due to the number of invariants that aren't
     /// checked:
     ///
-    /// * `ptr` needs to have been previously allocated via [`String`]/`Vec<T>`
-    ///   (at least, it's highly likely to be incorrect if it wasn't).
-    /// * `T` needs to have the same size and alignment as what `ptr` was allocated with.
+    /// * `ptr` must have been allocated using the global allocator, such as via
+    ///   the [`alloc::alloc`] function.
+    /// * `T` needs to have the same alignment as what `ptr` was allocated with.
     ///   (`T` having a less strict alignment is not sufficient, the alignment really
     ///   needs to be equal to satisfy the [`dealloc`] requirement that memory must be
     ///   allocated and deallocated with the same layout.)
+    /// * The size of `T` times the `capacity` (ie. the allocated size in bytes) needs
+    ///   to be the same size as the pointer was allocated with. (Because similar to
+    ///   alignment, [`dealloc`] must be called with the same layout `size`.)
     /// * `length` needs to be less than or equal to `capacity`.
+    /// * The first `length` values must be properly initialized values of type `T`.
     /// * `capacity` needs to be the capacity that the pointer was allocated with.
+    /// * The allocated size in bytes must be no larger than `isize::MAX`.
+    ///   See the safety documentation of [`pointer::offset`].
+    ///
+    /// These requirements are always upheld by any `ptr` that has been allocated
+    /// via `Vec<T>`. Other allocation sources are allowed if the invariants are
+    /// upheld.
     ///
     /// Violating these may cause problems like corrupting the allocator's
-    /// internal data structures. For example it is **not** safe
-    /// to build a `Vec<u8>` from a pointer to a C `char` array with length `size_t`.
+    /// internal data structures. For example it is normally **not** safe
+    /// to build a `Vec<u8>` from a pointer to a C `char` array with length
+    /// `size_t`, doing so is only safe if the array was initially allocated by
+    /// a `Vec` or `String`.
     /// It's also not safe to build one from a `Vec<u16>` and its length, because
     /// the allocator cares about the alignment, and these two types have different
     /// alignments. The buffer was allocated with alignment 2 (for `u16`), but after
-    /// turning it into a `Vec<u8>` it'll be deallocated with alignment 1.
+    /// turning it into a `Vec<u8>` it'll be deallocated with alignment 1. To avoid
+    /// these issues, it is often preferable to do casting/transmuting using
+    /// [`slice::from_raw_parts`] instead.
     ///
     /// The ownership of `ptr` is effectively transferred to the
     /// `Vec<T>` which may then deallocate, reallocate or change the
@@ -241,7 +255,10 @@ impl<T> RawParts<T> {
     /// function.
     ///
     /// [`String`]: alloc::string::String
+    /// [`alloc::alloc`]: alloc::alloc::alloc
     /// [`dealloc`]: alloc::alloc::GlobalAlloc::dealloc
+    /// [`slice::from_raw_parts`]: core::slice::from_raw_parts
+    /// [`pointer::offset`]: https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.offset
     ///
     /// # Examples
     ///
