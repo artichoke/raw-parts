@@ -289,6 +289,9 @@ impl<T> RawParts<T> {
 mod tests {
     use alloc::format;
     use alloc::vec::Vec;
+    use core::hash::{Hash, Hasher};
+
+    use rustc_hash::FxHasher;
 
     use crate::RawParts;
 
@@ -435,6 +438,23 @@ mod tests {
             capacity,
         };
         assert_eq!(a, b);
+    }
+
+    #[test]
+    fn hash_pass() {
+        let mut vec = Vec::with_capacity(100); // capacity is 100
+        vec.extend_from_slice(b"123456789"); // length is 9
+        let raw_parts = RawParts::from_vec(vec);
+
+        let mut hasher = FxHasher::default();
+        raw_parts.hash(&mut hasher);
+        let hash_a = hasher.finish();
+
+        let mut hasher = FxHasher::default();
+        raw_parts.hash(&mut hasher);
+        let hash_b = hasher.finish();
+
+        assert_eq!(hash_a, hash_b);
     }
 }
 
