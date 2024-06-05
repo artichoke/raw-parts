@@ -1,0 +1,22 @@
+{
+  "name": "@artichokeruby/raw-parts",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Types for a `Vec`'s raw parts",
+  "keywords": [
+    "vec",
+    "ffi",
+    "pointers",
+    "rust"
+  ],
+  "repository": "github:artichoke/raw-parts",
+  "author": "Ryan Lopopolo <rjl@hyperbo.la> (https://hyperbo.la/)",
+  "homepage": "https://www.artichokeruby.org",
+  "bugs": "https://github.com/artichoke/raw-parts/issues",
+  "devDependencies": {
+    "prettier": "3.2.5"
+  },
+  "scripts": {
+    "fmt": "prettier --write \"**/*\""
+  }
+}
