@@ -20,7 +20,7 @@ include = ["src/**/*", "tests/**/*", "LICENSE", "README.md"]
 
 [dev-dependencies]
 # a no_std hasher for tests of `impl Hash for RawParts`
-rustc-hash = { version = "1.1.0", default-features = false }
+rustc-hash = { version = "2.0.0", default-features = false }
 
 # Check that crate versions are properly updated in documentation and code when
 # bumping the version.
