@@ -305,7 +305,7 @@ mod tests {
     use alloc::vec::Vec;
     use core::hash::{Hash, Hasher};
 
-    use rustc_hash::FxHasher;
+    use fnv::FnvHasher;
 
     use crate::RawParts;
 
@@ -462,12 +462,12 @@ mod tests {
         vec_2.extend_from_slice(b"123456789"); // length is 9
 
         let raw_parts_1 = RawParts::from_vec(vec_1);
-        let mut hasher = FxHasher::default();
+        let mut hasher = FnvHasher::default();
         raw_parts_1.hash(&mut hasher);
         let hash_a = hasher.finish();
 
         let raw_parts_2 = RawParts::from_vec(vec_2);
-        let mut hasher = FxHasher::default();
+        let mut hasher = FnvHasher::default();
         raw_parts_2.hash(&mut hasher);
         let hash_b = hasher.finish();
 
@@ -482,12 +482,12 @@ mod tests {
         vec_2.extend_from_slice(b"123456789"); // length is 9
 
         let raw_parts_1 = RawParts::from_vec(vec_1);
-        let mut hasher = FxHasher::default();
+        let mut hasher = FnvHasher::default();
         raw_parts_1.hash(&mut hasher);
         let hash_a = hasher.finish();
 
         let raw_parts_2 = RawParts::from_vec(vec_2);
-        let mut hasher = FxHasher::default();
+        let mut hasher = FnvHasher::default();
         raw_parts_2.hash(&mut hasher);
         let hash_b = hasher.finish();
 
@@ -502,12 +502,12 @@ mod tests {
         vec_2.extend_from_slice(b"12345678"); // length is 8
 
         let raw_parts_1 = RawParts::from_vec(vec_1);
-        let mut hasher = FxHasher::default();
+        let mut hasher = FnvHasher::default();
         raw_parts_1.hash(&mut hasher);
         let hash_a = hasher.finish();
 
         let raw_parts_2 = RawParts::from_vec(vec_2);
-        let mut hasher = FxHasher::default();
+        let mut hasher = FnvHasher::default();
         raw_parts_2.hash(&mut hasher);
         let hash_b = hasher.finish();
 
@@ -520,11 +520,11 @@ mod tests {
         vec.extend_from_slice(b"123456789"); // length is 9
         let raw_parts = RawParts::from_vec(vec);
 
-        let mut hasher = FxHasher::default();
+        let mut hasher = FnvHasher::default();
         raw_parts.hash(&mut hasher);
         let hash_a = hasher.finish();
 
-        let mut hasher = FxHasher::default();
+        let mut hasher = FnvHasher::default();
         raw_parts.hash(&mut hasher);
         let hash_b = hasher.finish();
 
