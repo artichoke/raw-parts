@@ -24,7 +24,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-raw-parts = "2.1.0"
+raw-parts = "2.2.0"
 ```
 
 Then decompose `Vec<T>`s like:
@@ -53,7 +53,7 @@ raw-parts is `no_std` compatible with a required dependency on [`alloc`].
 
 ## Minimum Supported Rust Version
 
-This crate requires at least Rust 1.56.0. This version can be bumped in minor
+This crate requires at least Rust 1.76.0. This version can be bumped in minor
 releases.
 
 ## License
