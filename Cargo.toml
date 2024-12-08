@@ -1,10 +1,10 @@
 [package]
 name = "raw-parts"
-version = "2.1.0"
+version = "2.2.0"
 authors = ["Ryan Lopopolo <rjl@hyperbo.la>"]
 license = "MIT"
 edition = "2021"
-rust-version = "1.56.0"
+rust-version = "1.76.0"
 readme = "README.md"
 repository = "https://github.com/artichoke/raw-parts"
 documentation = "https://docs.rs/raw-parts"
