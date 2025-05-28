@@ -142,17 +142,21 @@ impl<T> Hash for RawParts<T> {
     }
 }
 
-// Do not implement the `From` trait in the other direction since `crate::from`
-// is an unsafe function.
+// Do not implement the `From` trait in the other direction. Converting a
+// `RawParts` back into a `Vec` requires an `unsafe` block via the [`into_vec`]
+// method, which we don't want to hide in a `From` impl.
 //
 // ```
 // impl<T> From<RawParts<T>> for Vec<T> {
 //     fn from(raw_parts: RawParts<T>) -> Self {
 //         // ERROR: this requires `unsafe`, which we don't want to hide in a
 //         // `From` impl.
-//         from(raw_parts)
+//         unsafe { raw_parts.into_vec() }
 //     }
 // }
+// ```
+//
+// [`into_vec`]: Self::into_vec
 
 impl<T> RawParts<T> {
     /// Construct the raw components of a `Vec<T>` by decomposing it.
@@ -262,7 +266,6 @@ impl<T> RawParts<T> {
     ///
     /// ```
     /// use core::ptr;
-    /// use core::mem;
     ///
     /// use raw_parts::RawParts;
     ///
