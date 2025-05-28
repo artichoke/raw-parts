@@ -359,6 +359,19 @@ mod tests {
     }
 
     #[test]
+    fn from_vec_empty() {
+        let vec: Vec<u8> = Vec::new();
+
+        let raw_parts = RawParts::from_vec(vec);
+        assert_eq!(raw_parts.length, 0);
+        assert_eq!(raw_parts.capacity, 0);
+        assert!(!raw_parts.ptr.is_null());
+
+        // Rebuild the Vec to avoid leaking memory.
+        let _ = unsafe { raw_parts.into_vec() };
+    }
+
+    #[test]
     fn from_sets_ptr() {
         let mut vec = Vec::with_capacity(100); // capacity is 100
         vec.extend_from_slice(b"123456789"); // length is 9
