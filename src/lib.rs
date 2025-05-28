@@ -332,6 +332,7 @@ mod tests {
 
         let raw_parts = RawParts::from_vec(vec);
         assert_eq!(raw_parts.ptr, ptr);
+        drop(unsafe { raw_parts.into_vec() });
     }
 
     #[test]
@@ -341,6 +342,7 @@ mod tests {
 
         let raw_parts = RawParts::from_vec(vec);
         assert_eq!(raw_parts.length, 9);
+        drop(unsafe { raw_parts.into_vec() });
     }
 
     #[test]
@@ -350,6 +352,7 @@ mod tests {
 
         let raw_parts = RawParts::from_vec(vec);
         assert_eq!(raw_parts.capacity, 100);
+        drop(unsafe { raw_parts.into_vec() });
     }
 
     #[test]
@@ -360,6 +363,7 @@ mod tests {
 
         let raw_parts = RawParts::from(vec);
         assert_eq!(raw_parts.ptr, ptr);
+        drop(unsafe { raw_parts.into_vec() });
     }
 
     #[test]
@@ -369,6 +373,7 @@ mod tests {
 
         let raw_parts = RawParts::from(vec);
         assert_eq!(raw_parts.length, 9);
+        drop(unsafe { raw_parts.into_vec() });
     }
 
     #[test]
@@ -378,6 +383,7 @@ mod tests {
 
         let raw_parts = RawParts::from(vec);
         assert_eq!(raw_parts.capacity, 100);
+        drop(unsafe { raw_parts.into_vec() });
     }
 
     #[test]
@@ -393,6 +399,7 @@ mod tests {
             ),
             format!("{:?}", raw_parts)
         );
+        drop(unsafe { raw_parts.into_vec() });
     }
 
     #[test]
@@ -405,6 +412,8 @@ mod tests {
         let raw_parts_1 = RawParts::from_vec(vec_1);
         let raw_parts_2 = RawParts::from_vec(vec_2);
         assert_ne!(raw_parts_1, raw_parts_2);
+        drop(unsafe { raw_parts_1.into_vec() });
+        drop(unsafe { raw_parts_2.into_vec() });
     }
 
     #[test]
@@ -417,6 +426,8 @@ mod tests {
         let raw_parts_1 = RawParts::from_vec(vec_1);
         let raw_parts_2 = RawParts::from_vec(vec_2);
         assert_ne!(raw_parts_1, raw_parts_2);
+        drop(unsafe { raw_parts_1.into_vec() });
+        drop(unsafe { raw_parts_2.into_vec() });
     }
 
     #[test]
@@ -429,6 +440,8 @@ mod tests {
         let raw_parts_1 = RawParts::from_vec(vec_1);
         let raw_parts_2 = RawParts::from_vec(vec_2);
         assert_ne!(raw_parts_1, raw_parts_2);
+        drop(unsafe { raw_parts_1.into_vec() });
+        drop(unsafe { raw_parts_2.into_vec() });
     }
 
     #[test]
@@ -452,6 +465,7 @@ mod tests {
             capacity,
         };
         assert_eq!(a, b);
+        drop(unsafe { RawParts { ptr, length, capacity }.into_vec() });
     }
 
     #[test]
@@ -472,6 +486,8 @@ mod tests {
         let hash_b = hasher.finish();
 
         assert_ne!(hash_a, hash_b);
+        drop(unsafe { raw_parts_1.into_vec() });
+        drop(unsafe { raw_parts_2.into_vec() });
     }
 
     #[test]
@@ -492,6 +508,8 @@ mod tests {
         let hash_b = hasher.finish();
 
         assert_ne!(hash_a, hash_b);
+        drop(unsafe { raw_parts_1.into_vec() });
+        drop(unsafe { raw_parts_2.into_vec() });
     }
 
     #[test]
@@ -512,6 +530,8 @@ mod tests {
         let hash_b = hasher.finish();
 
         assert_ne!(hash_a, hash_b);
+        drop(unsafe { raw_parts_1.into_vec() });
+        drop(unsafe { raw_parts_2.into_vec() });
     }
 
     #[test]
@@ -529,6 +549,7 @@ mod tests {
         let hash_b = hasher.finish();
 
         assert_eq!(hash_a, hash_b);
+        drop(unsafe { raw_parts.into_vec() });
     }
 }
 
