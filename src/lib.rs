@@ -465,7 +465,14 @@ mod tests {
             capacity,
         };
         assert_eq!(a, b);
-        drop(unsafe { RawParts { ptr, length, capacity }.into_vec() });
+        drop(unsafe {
+            RawParts {
+                ptr,
+                length,
+                capacity,
+            }
+            .into_vec()
+        });
     }
 
     #[test]
