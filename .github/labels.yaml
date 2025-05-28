@@ -115,3 +115,6 @@
 - name: "S-wontfix"
   color: "d3dddd"
   description: "Status: This issue or pull request will not be worked on."
+- name: "codex"
+  color: "316dca"
+  description: "PR generated with ChatGPT Codex"
