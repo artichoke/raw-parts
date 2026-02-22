@@ -9,8 +9,7 @@ name: Audit
       - trunk
   schedule:
     - cron: "0 0 * * TUE"
-permissions:
-  contents: read # required to checkout
+permissions: {}
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
@@ -18,6 +17,8 @@ jobs:
   ruby:
     name: Audit Ruby Dependencies
     runs-on: ubuntu-latest
+    permissions:
+      contents: read # required to checkout repository
 
     steps:
       - name: Checkout repository
@@ -42,6 +43,8 @@ jobs:
         checks:
           - advisories
           - bans licenses sources
+    permissions:
+      contents: read # required to checkout repository
 
     # Prevent sudden announcement of a new advisory from failing ci:
     continue-on-error: ${{ matrix.checks == 'advisories' }}
@@ -53,7 +56,9 @@ jobs:
           persist-credentials: false
 
       - name: Install Rust toolchain
-        uses: artichoke/setup-rust/audit@68e0ebb3b406970de1cc2ca807797c9156a198a7 # v2.0.1
+        uses: dtolnay/rust-toolchain@e97e2d8cc328f1b50210efc529dca0028893a2d9 # master
+        with:
+          toolchain: stable
 
       - name: Generate Cargo.lock
         run: |
@@ -71,7 +76,8 @@ jobs:
     name: Run zizmor 🌈
     runs-on: ubuntu-latest
     permissions:
-      security-events: write # required to write security events via sarif
+      contents: read # required to checkout repository
+      security-events: write # required to add findings via sarif
     steps:
       - name: Checkout repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
