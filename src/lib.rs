@@ -17,7 +17,6 @@
 //
 // This approach is borrowed from tokio.
 #![cfg_attr(docsrs, feature(doc_cfg))]
-#![cfg_attr(docsrs, feature(doc_alias))]
 
 //! A wrapper around the decomposed parts of a `Vec<T>`.
 //!
@@ -53,7 +52,7 @@
 //! raw-parts is `no_std` compatible with a required dependency on [`alloc`].
 
 #![no_std]
-#![doc(html_root_url = "https://docs.rs/raw-parts/2.2.1")]
+#![doc(html_root_url = "https://docs.rs/raw-parts/2.2.2")]
 
 extern crate alloc;
 
