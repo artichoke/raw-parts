@@ -1,8 +1,9 @@
 ---
-require: rubocop-rake
+plugins:
+  - rubocop-rake
 AllCops:
   NewCops: enable
-  TargetRubyVersion: 3.2
+  TargetRubyVersion: 4.0
   DisplayCopNames: true
   Exclude:
     - "**/node_modules/**/*"
