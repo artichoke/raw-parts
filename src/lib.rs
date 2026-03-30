@@ -52,7 +52,7 @@
 //! raw-parts is `no_std` compatible with a required dependency on [`alloc`].
 
 #![no_std]
-#![doc(html_root_url = "https://docs.rs/raw-parts/2.2.2")]
+#![doc(html_root_url = "https://docs.rs/raw-parts/2.2.3")]
 
 extern crate alloc;
 
@@ -88,6 +88,38 @@ use core::mem::ManuallyDrop;
 ///     raw_parts.into_vec()
 /// };
 /// assert_eq!(rebuilt, [4294967295, 0, 1]);
+/// ```
+///
+/// `RawParts<T>` must not accidentally gain `Send` or `Sync` for element types
+/// that do not support crossing thread boundaries.
+///
+/// ```compile_fail
+/// use raw_parts::RawParts;
+/// use std::rc::Rc;
+///
+/// fn assert_send<T: Send>() {}
+/// fn assert_sync<T: Sync>() {}
+///
+/// fn main() {
+///     assert_send::<RawParts<Rc<()>>>();
+///     assert_sync::<RawParts<Rc<()>>>();
+/// }
+/// ```
+///
+/// `RawParts<T>` must also preserve the lifetime of borrowed element types
+/// rather than allowing them to widen to `'static`.
+///
+/// ```compile_fail
+/// use raw_parts::RawParts;
+///
+/// fn need_static(_: RawParts<&'static str>) {}
+///
+/// fn main() {
+///     let s = String::from("hi");
+///     let v = vec![s.as_str()];
+///     let raw = RawParts::from_vec(v);
+///     need_static(raw);
+/// }
 /// ```
 pub struct RawParts<T> {
     /// A non-null pointer to a buffer of `T`.
