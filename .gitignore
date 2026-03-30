@@ -408,7 +408,8 @@ tags
 
 # Cargo and other Rust tool configuration lives in a top-level `.config/` directory.
 !/.config/
-.mise.local.toml
+mise.local.toml
+mise.*.local.toml
 # https://github.com/sourcefrog/cargo-mutants/blob/main/.gitignore
 mutants.out
 mutants.out.old
