@@ -13,6 +13,9 @@ target/
 !*.yaml
 !*.yml
 
+pnpm-lock.yaml
+pnpm-workspace.yaml
+
 mutants.out*/
 **/vendor/*
 !**/vendor/*.md
