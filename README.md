@@ -5,7 +5,6 @@
 <br>
 [![Crate](https://img.shields.io/crates/v/raw-parts.svg)](https://crates.io/crates/raw-parts)
 [![API](https://docs.rs/raw-parts/badge.svg)](https://docs.rs/raw-parts)
-[![API trunk](https://img.shields.io/badge/docs-trunk-blue.svg)](https://artichoke.github.io/raw-parts/raw_parts/)
 
 A wrapper around the decomposed parts of a `Vec<T>`.
 
