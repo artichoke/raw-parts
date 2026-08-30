@@ -28,10 +28,10 @@ raw-parts includes Rust, Ruby, and Text sources. Developing on raw-parts
 requires configuring several dependencies.
 
 raw-parts uses [mise] to manage the local development toolchain declared in
-[`mise.toml`](mise.toml), including Node.js, Python, Ruby, Rust, `uv`, and
-repo-local developer tools like `cargo-deny`, `cargo-mutants`, `cargo-outdated`,
-and `zizmor`. For Rust, `mise` uses [rustup] under the hood. Nightly-only Rust
-workflows in this repository continue to use `rustup` directly.
+[`mise.toml`](mise.toml), including Node.js, Rust, and repo-local developer
+tools like `cargo-deny`, `cargo-mutants`, `cargo-outdated`, and `zizmor`. For
+Rust, `mise` uses [rustup] under the hood. Nightly-only Rust workflows in this
+repository continue to use `rustup` directly.
 
 ### Rust Toolchain
 
@@ -82,8 +82,8 @@ mise install
 gem install bundler
 ```
 
-The pinned versions for Node.js, Python, Ruby, Rust, `uv`, and the repo-local
-developer tools live in [`mise.toml`](mise.toml).
+The pinned versions for Node.js, Rust, and the repo-local developer tools live
+in [`mise.toml`](mise.toml).
 
 The [`Gemfile`](Gemfile) in this repository specifies several dev dependencies.
 You can install these dependencies by running:
@@ -139,17 +139,6 @@ Node.js is only required for formatting if modifying the following filetypes:
 - `yml`
 
 Install Node.js with `mise`:
-
-```sh
-mise install
-```
-
-### Python and uv
-
-Python and `uv` are optional dependencies that are used for linting YAML sources
-with `yamllint`.
-
-Install them with `mise`:
 
 ```sh
 mise install
