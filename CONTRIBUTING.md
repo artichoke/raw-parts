@@ -24,8 +24,8 @@ issues are labeled `E-easy`].
 
 ## Setup
 
-raw-parts includes Rust, Ruby, and Text sources. Developing on raw-parts
-requires configuring several dependencies.
+raw-parts includes Rust and text sources. Developing on raw-parts requires
+configuring several dependencies.
 
 raw-parts uses [mise] to manage the local development toolchain declared in
 [`mise.toml`](mise.toml), including Node.js, Rust, and repo-local developer
@@ -52,9 +52,8 @@ mise install
 profile plus the `clippy` and `rustfmt` components. `mise` installs that
 toolchain via [rustup].
 
-Some repository tasks still require nightly Rust. For example,
-[`Rakefile`](Rakefile) runs `cargo doc` with `rustup run --install nightly`,
-which will install nightly on demand if needed.
+Some repository tasks still require nightly Rust. The `doc` mise task uses
+`rustup run --install nightly`, which installs nightly on demand if needed.
 
 To update your stable Rust compiler to the latest version, run:
 
@@ -72,60 +71,21 @@ toolchain installed, you can install the crates specified in
 cargo build
 ```
 
-### Ruby
+### Development tasks
 
-raw-parts requires a recent Ruby and [bundler] for development tasks. Install
-the development toolchain with [mise]:
+The pinned versions for Node.js, Rust, and the repo-local developer tools live
+in [`mise.toml`](mise.toml). Install the toolchain and text-formatting
+dependencies with:
 
 ```sh
 mise install
-gem install bundler
+mise run pnpm-install
 ```
 
-The pinned versions for Node.js, Rust, and the repo-local developer tools live
-in [`mise.toml`](mise.toml).
-
-The [`Gemfile`](Gemfile) in this repository specifies several dev dependencies.
-You can install these dependencies by running:
-
-```sh
-bundle install
-```
+Run `mise tasks` to list the available build, test, lint, format, and
+documentation tasks.
 
 [mise]: https://mise.jdx.dev/
-
-raw-parts uses [`rake`](Rakefile) as a task runner. You can see the available
-tasks by running:
-
-```console
-$ bundle exec rake --tasks
-rake build                         # Build Rust workspace
-rake bundle:audit:check            # Checks the Gemfile.lock for insecure dependencies
-rake bundle:audit:update           # Updates the bundler-audit vulnerability database
-rake doc                           # Generate Rust API documentation
-rake doc:open                      # Generate Rust API documentation and open it in a web browser
-rake fmt                           # Format sources
-rake fmt:rust                      # Format Rust sources with rustfmt
-rake fmt:text                      # Format text, YAML, and Markdown sources with prettier
-rake format                        # Format sources
-rake format:rust                   # Format Rust sources with rustfmt
-rake format:text                   # Format text, YAML, and Markdown sources with prettier
-rake lint                          # Lint sources
-rake lint:clippy                   # Lint Rust sources with Clippy
-rake lint:clippy:restriction       # Lint Rust sources with Clippy restriction pass (unenforced lints)
-rake lint:rubocop                  # Run RuboCop
-rake lint:rubocop:autocorrect      # Autocorrect RuboCop offenses (only when it's safe)
-rake lint:rubocop:autocorrect_all  # Autocorrect RuboCop offenses (safe and unsafe)
-rake test                          # Run raw-parts unit tests
-```
-
-To lint Ruby sources, raw-parts uses [RuboCop]. RuboCop runs as part of the
-`lint` task. To run RuboCop by itself, invoke the `lint:rubocop` task.
-
-```console
-$ bundle exec rake lint
-$ bundle exec rake lint:rubocop
-```
 
 ### Node.js
 
@@ -146,10 +106,10 @@ mise install
 
 ## Linting
 
-To lint and format all sources run:
+To lint all sources run:
 
 ```sh
-rake lint
+mise run lint
 ```
 
 ## Testing
@@ -160,7 +120,7 @@ on testing] is a good place to start.
 To run tests:
 
 ```sh
-cargo test
+mise run test
 ```
 
 `cargo test` accepts a filter argument that will limit test execution to tests
@@ -199,7 +159,6 @@ Regular dependency bumps are handled by [@dependabot].
   https://github.com/artichoke/raw-parts/labels/E-easy
 [rustup]: https://rustup.rs/
 [homebrew]: https://docs.brew.sh/Installation
-[bundler]: https://bundler.io/
 [rubocop]: https://github.com/rubocop-hq/rubocop
 [prettier]: https://prettier.io/
 [node.js]: https://nodejs.org/en/download/package-manager/
