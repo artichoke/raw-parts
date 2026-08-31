@@ -1,6 +1,6 @@
 [package]
 name = "raw-parts"
-version = "2.2.3"
+version = "2.2.4"
 authors = ["Ryan Lopopolo <rjl@hyperbo.la>"]
 license = "MIT"
 edition = "2021"

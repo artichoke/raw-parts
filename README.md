@@ -6,6 +6,10 @@
 [![Crate](https://img.shields.io/crates/v/raw-parts.svg)](https://crates.io/crates/raw-parts)
 [![API](https://docs.rs/raw-parts/badge.svg)](https://docs.rs/raw-parts)
 
+> [!NOTE]  
+> This crate is feature complete and frozen. It will not receive further
+> development.
+
 A wrapper around the decomposed parts of a `Vec<T>`.
 
 This struct contains the `Vec`'s internal pointer, length, and allocated
@@ -21,7 +25,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-raw-parts = "2.2.3"
+raw-parts = "2.2.4"
 ```
 
 Then decompose `Vec<T>`s like:

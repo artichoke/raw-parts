@@ -52,7 +52,7 @@
 //! raw-parts is `no_std` compatible with a required dependency on [`alloc`].
 
 #![no_std]
-#![doc(html_root_url = "https://docs.rs/raw-parts/2.2.3")]
+#![doc(html_root_url = "https://docs.rs/raw-parts/2.2.4")]
 
 extern crate alloc;
 
